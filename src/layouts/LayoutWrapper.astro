@@ -1,0 +1,8 @@
+---
+import MainLayout from '../layouts/MainLayout.tsx';
+const { children, title } = Astro.props;
+---
+
+<MainLayout title={title}>
+  <slot />
+</MainLayout>
