@@ -1,0 +1,39 @@
+---
+import Layout from '../../layouts/MainLayout.astro';
+
+export const prerender = false;
+
+import { supabase } from '../../supabaseClient';
+import { AstroError } from 'astro/errors';
+
+type Burger = {
+  id: string;
+  nombre: string;
+  imagen_url: string;
+  restaurante: string;
+  descripcion: string;
+};
+
+const { id } = Astro.params;
+
+//let burger: Burger | null = null;
+
+const { data, error } = await supabase
+  .from('hamburguesas')
+  .select('*')
+  .eq('id', id)
+  .single();
+
+if (error || !data) {
+  throw new AstroError(`Burger no encontrada con id ${id}`);
+}
+
+const burger = data;
+---
+
+<Layout title={`${burger.nombre} | The Champions Burger`}>
+  <h1 class="text-4xl font-extrabold text-purple-600 mb-4">{burger.nombre}</h1>
+  <img src={burger.imagen_url} alt={burger.nombre} class="rounded-xl mb-6 shadow-md" />
+  <h2 class="text-xl font-semibold text-gray-600 mb-2">{burger.restaurante}</h2>
+  <p class="text-gray-700">{burger.descripcion}</p>
+</Layout>
