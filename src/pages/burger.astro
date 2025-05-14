@@ -1,0 +1,8 @@
+---
+import ClerkLayout from "../layouts/ClerkLayout.astro";
+import BurgersList from "../components/BurgerList";
+---
+
+<ClerkLayout title="Hamburguesas participantes">
+  <BurgersList client:only="react" />
+</ClerkLayout>

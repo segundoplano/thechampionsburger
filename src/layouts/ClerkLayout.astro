@@ -1,21 +1,19 @@
 ---
 // src/layouts/ClerkLayout.astro
-import { ClerkProvider } from '@clerk/clerk-react';
-import NavbarWrapper from "../components/NavbarWrapper.tsx";
-import MainLayout from './MainLayout.tsx';
+import NavbarProviderWrapper from "../components/NavbarProviderWrapper.tsx";
+import MainLayout from "./MainLayout.tsx";
 
 const { children, title = "Champions Burger" } = Astro.props;
-const publishableKey = import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY;
 ---
 
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body class="bg-[#fafafa] text-gray-800 min-h-screen">
-    <NavbarWrapper client:only="react" />
+    <NavbarProviderWrapper client:only="react" />
     <MainLayout>
       <slot />
     </MainLayout>
