@@ -1,6 +1,5 @@
 ---
-import Layout from '../../layouts/LayoutWrapper.astro';
-//import { ProbarBurger } from '../../components/ProbarBurger.tsx';
+import ClerkLayout  from '../../layouts/ClerkLayout.astro';
 import { supabase } from '../../supabaseClient';
 import { AstroError } from 'astro/errors';
 
@@ -26,7 +25,7 @@ if (error || !data) {
 const burger = data;
 ---
 
-<Layout title={`${burger.nombre} | The Champions Burger`}>
+<ClerkLayout title={`${burger.nombre} | The Champions Burger`}>
   <h1 class="text-4xl font-extrabold text-purple-600 mb-4">{burger.nombre}</h1>
   <img src={burger.imagen_url} alt={burger.nombre} class="rounded-xl mb-6 shadow-md" />
   <h2 class="text-xl font-semibold text-gray-600 mb-2">{burger.restaurante}</h2>
@@ -48,5 +47,5 @@ const burger = data;
     </div>
   )}
 
-  <!--  <ProbarBurger burgerId={burger.id} client:load />-->
-</Layout>
+
+</ClerkLayout>
