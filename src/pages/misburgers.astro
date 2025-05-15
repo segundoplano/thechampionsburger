@@ -1,16 +1,5 @@
 ---
-// src/pages/misburgers.astro
-import MainLayout from "../layouts/MainLayout.tsx"; // o usa HTML directo si quieres
-import MisBurgersPageWrapper from "../components/MisBurgersPageWrapper.tsx";
+import MisBurgersPage from "../pages-react/MisBurgersPage.tsx";
 ---
 
-<html lang="es">
-  <head>
-    <title>Mis Burgers</title>
-  </head>
-  <body class="bg-white text-black">
-    <MainLayout>
-      <MisBurgersPageWrapper client:only="react" />
-    </MainLayout>
-  </body>
-</html>
+<MisBurgersPage client:only="react" />

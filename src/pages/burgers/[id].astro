@@ -1,51 +1,7 @@
 ---
-import ClerkLayout  from '../../layouts/ClerkLayout.astro';
-import { supabase } from '../../supabaseClient';
-import { AstroError } from 'astro/errors';
-
-export const prerender = false;
-
+// src/pages/burgers/[id].astro
+import BurgerDetailPage from "../../pages-react/BurgerDetailPage.tsx";
 const { id } = Astro.params;
-
-const { data, error } = await supabase
-  .from('hamburguesas')
-  .select('*')
-  .eq('id', id)
-  .single();
-
-const { data: alergenos, error: alergenosError } = await supabase
-  .from('hamburguesa_alergenos')
-  .select('alergenos(nombre, icono_url)')
-  .eq('hamburguesa_id', id);
-
-if (error || !data) {
-  throw new AstroError(`Burger no encontrada con id ${id}`);
-}
-
-const burger = data;
 ---
 
-<ClerkLayout title={`${burger.nombre} | The Champions Burger`}>
-  <h1 class="text-4xl font-extrabold text-purple-600 mb-4">{burger.nombre}</h1>
-  <img src={burger.imagen_url} alt={burger.nombre} class="rounded-xl mb-6 shadow-md" />
-  <h2 class="text-xl font-semibold text-gray-600 mb-2">{burger.restaurante}</h2>
-  <p class="text-gray-700">{burger.descripcion}</p>
-
-  {alergenos && alergenos.length > 0 && (
-    <div class="mt-6 text-left">
-      <h3 class="font-bold text-sm text-gray-600 mb-2">Contiene:</h3>
-      <ul class="flex flex-wrap gap-2">
-        {alergenos.map((item) => (
-          <li class="bg-yellow-100 px-3 py-1 rounded-full text-sm text-gray-800 flex items-center gap-1">
-            {item.alergenos.icono_url && (
-              <img src={item.alergenos.icono_url} alt={item.alergenos.nombre} class="w-4 h-4" />
-            )}
-            {item.alergenos.nombre}
-          </li>
-        ))}
-      </ul>
-    </div>
-  )}
-
-
-</ClerkLayout>
+<BurgerDetailPage burgerId={id} client:only="react" />
