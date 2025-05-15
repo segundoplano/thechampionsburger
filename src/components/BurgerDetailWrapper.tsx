@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import { useUser } from "@clerk/clerk-react";
 
+
 type Props = {
   burgerId: string;
 };
@@ -11,7 +12,8 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
   const [burger, setBurger] = useState<any>(null);
   const [alergenos, setAlergenos] = useState<any[]>([]);
   const { user } = useUser();
-
+  const [marcada, setMarcada] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,6 +33,56 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
 
     fetchData();
   }, [burgerId]);
+
+
+  useEffect(() => {
+    if (!user) return;
+    console.log("🔍 Comprobando si ya fue marcada como probada...")
+    async function checkProbada() {
+      const { data, error } = await supabase
+    .from("hamburguesas_probadas")
+    .select("*")
+    .eq("usuario_id", user.id)
+    .eq("hamburguesa_id", burgerId)
+    .maybeSingle();
+
+        console.log("🧾 Resultado de checkProbada:", { data, error });
+
+      if (data) setMarcada(true);
+    }
+
+    checkProbada();
+  }, [user, burgerId]);
+
+  async function marcarComoProbada() {
+  if (!user || marcada) {
+    console.log("⛔ Usuario no disponible o ya marcada");
+    return;
+  }
+
+  setLoading(true);
+  console.log("📤 Insertando en Supabase...");
+  console.log("📌 user.id:", user.id, "burgerId:", burgerId);
+
+
+  const { error } = await supabase.from("hamburguesas_probadas").insert({
+    usuario_id: user.id,
+    hamburguesa_id: burgerId,
+    puntuacion: null, // al principio no puntuamos
+  });
+
+  console.log("✅ Resultado de insert:", { error });
+
+  setLoading(false);
+
+  if (!error) {
+    alert("🍔 Añadida correctamente como probada");
+    setMarcada(true);
+  } else {
+    alert("❌ Error al guardar. Intenta de nuevo.");
+  }
+}
+
 
   if (!burger) return <p className="p-4">Cargando...</p>;
 
@@ -71,15 +123,20 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
         )}
 
         <div className="mt-6">
-        {user ? (
-          <button className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">
-            Marcar como probada 🍔
-          </button>
-        ) : (
-          <p className="text-sm text-gray-600 italic">
-            <a href="/sign-in" className="text-blue-600 underline">Inicia sesión</a> para marcar esta burger como probada.
-          </p>
-        )}
+        {user && (
+        <button
+          onClick={marcarComoProbada}
+          disabled={marcada || loading}
+          className={`px-4 py-2 rounded-lg text-white ${
+            marcada
+              ? "bg-gray-400 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700"
+          }`}
+        >
+          {marcada ? "Ya marcada como probada ✅" : "Marcar como probada 🍔"}
+        </button>
+      )}
+
       </div>
 
       </main>
