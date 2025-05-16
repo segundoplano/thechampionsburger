@@ -79,6 +79,14 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
 
   return (
     <main className="max-w-3xl mx-auto p-4">
+        <div className="relative mb-6">
+    {burger.logo_url && (
+      <div className="flex justify-center mb-4 bg-black p-3">
+        <img src={burger.logo_url} alt={`Logo de ${burger.restaurante}`} className="h-16 object-contain" />
+      </div>
+    )}
+  </div>
+
       <h1 className="text-4xl font-bold mb-4">{burger.nombre}</h1>
       <img
         src={burger.imagen_url}
@@ -122,12 +130,19 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
 
         {/* ✅ Aquí metemos el StarRating PRO, editable solo si marcada */}
         {marcada && (
+          <div className="mt-4">
           <StarRating
             burgerId={burgerId}
             usuarioId={user?.id}
             initialRating={puntuacion}
             onRated={(newRating) => setPuntuacion(newRating)}
           />
+          {puntuacion === null && (
+            <p className="text-sm text-gray-400 mt-2">
+              ¿Quieres puntuarla? Solo tienes que hacer clic en las estrellas ⭐
+            </p>
+          )}
+          </div>
         )}
       </div>
     </main>
