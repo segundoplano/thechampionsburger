@@ -1,6 +1,7 @@
 import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+import StarRating from "./StarRating";
 
 export default function ProtectedMisBurgers() {
   const { user } = useUser();
@@ -17,6 +18,8 @@ export default function ProtectedMisBurgers() {
         .eq("usuario_id", user.id);
 
       console.log("📦 misBurgers:", data);
+      
+
 
       if (data) setMisBurgers(data);
       setLoading(false);
@@ -41,22 +44,21 @@ export default function ProtectedMisBurgers() {
           ) : (
             <ul className="space-y-4">
               {misBurgers.map((item) => (
-                <li
-                  key={item.hamburguesas.id}
-                  className="border rounded-lg p-4 shadow-sm bg-white"
-                >
-                  <h2 className="text-lg font-semibold">{item.hamburguesas.nombre}</h2>
-                  <img
-                    src={item.hamburguesas.imagen_url}
-                    alt={item.hamburguesas.nombre}
-                    className="w-full max-w-md rounded-lg my-2"
-                  />
-                  <p className="text-gray-700">{item.hamburguesas.descripcion}</p>
-                  {item.puntuacion && (
-                    <p className="mt-2">⭐ Puntuación: {item.puntuacion}/5</p>
-                  )}
-                </li>
-              ))}
+              <li
+                key={item.hamburguesas.id}
+                className="border rounded-lg p-4 shadow-sm bg-white"
+              >
+                <h2 className="text-lg font-semibold">{item.hamburguesas.nombre}</h2>
+                <img
+                  src={item.hamburguesas.imagen_url}
+                  alt={item.hamburguesas.nombre}
+                  className="w-full max-w-md rounded-lg my-2"
+                />
+                <p className="text-gray-700">{item.hamburguesas.descripcion}</p>
+                <StarRating initialRating={item.puntuacion} readOnly />
+              </li>
+            ))}
+
             </ul>
           )}
         </div>

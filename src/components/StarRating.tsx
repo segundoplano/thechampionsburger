@@ -1,20 +1,29 @@
-// src/components/RatingStars.tsx
+// src/components/StarRating.tsx
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
 
 type Props = {
-  burgerId: string;
-  usuarioId: string;
+  burgerId?: string;
+  usuarioId?: string;
   initialRating: number | null;
   onRated?: (rating: number) => void;
+  readOnly?: boolean; // ← si es solo lectura
+  size?: string; // eg: text-2xl
 };
 
-export default function RatingStars({ burgerId, usuarioId, initialRating, onRated }: Props) {
+export default function StarRating({
+  burgerId,
+  usuarioId,
+  initialRating,
+  onRated,
+  readOnly = false,
+  size = "text-3xl",
+}: Props) {
   const [rating, setRating] = useState(initialRating || 0);
   const [loading, setLoading] = useState(false);
 
   async function handleRate(newRating: number) {
-    if (loading) return;
+    if (readOnly || loading || !burgerId || !usuarioId) return;
     setLoading(true);
 
     const { error } = await supabase
@@ -35,14 +44,15 @@ export default function RatingStars({ burgerId, usuarioId, initialRating, onRate
   }
 
   return (
-    <div className="flex space-x-2 mt-4">
+    <div className={`flex space-x-1 mt-2`}>
       {[1, 2, 3, 4, 5].map((star) => (
         <button
           key={star}
           onClick={() => handleRate(star)}
-          className={`text-3xl ${star <= rating ? "text-yellow-400" : "text-gray-300"}`}
+          disabled={readOnly}
+          className={`${size} ${readOnly ? "cursor-default" : "cursor-pointer"} text-yellow-400`}
         >
-          ⭐
+          {star <= rating ? "★" : "☆"}
         </button>
       ))}
     </div>
