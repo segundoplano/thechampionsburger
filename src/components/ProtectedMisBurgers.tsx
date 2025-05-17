@@ -1,10 +1,12 @@
-import { SignedIn, SignedOut, RedirectToSignIn, useUser } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, useUser } from "@clerk/clerk-react";
+import { useSignInModal } from "../hooks/useSignInModal";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import StarRating from "./StarRating";
 
 export default function ProtectedMisBurgers() {
   const { user } = useUser();
+  const { open, component: signInModal } = useSignInModal(); 
   const [misBurgers, setMisBurgers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
@@ -54,8 +56,18 @@ export default function ProtectedMisBurgers() {
 
   return (
     <>
+      {signInModal} {/* 👈 Aquí para que se renderice sobre todo */}
+
       <SignedOut>
-        <RedirectToSignIn redirectUrl="/" />
+        <div className="p-8 text-center">
+          <h1 className="text-2xl font-bold mb-4">¡Ups! Debes iniciar sesión para ver tus hamburguesas 🍔</h1>
+          <button
+            onClick={open} // ✅ Limpito
+            className="mt-4 bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+          >
+            Iniciar sesión ahora
+          </button>
+        </div>
       </SignedOut>
 
       <SignedIn>

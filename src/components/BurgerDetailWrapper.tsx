@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
-import { useUser } from "@clerk/clerk-react";
+import { useUser, SignedOut, SignedIn } from "@clerk/clerk-react";
+import { useSignInModalBurger } from "../hooks/useSignInModalBurger";
 import StarRating from "./StarRating";
 
 type Props = {
@@ -11,6 +12,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
   const [burger, setBurger] = useState<any>(null);
   const [alergenos, setAlergenos] = useState<any[]>([]);
   const { user } = useUser();
+  const { open, SignInModal  } = useSignInModalBurger();
   const [marcada, setMarcada] = useState(false);
   const [puntuacion, setPuntuacion] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
@@ -116,7 +118,20 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
       )}
 
       <div className="mt-6">
-        {user && (
+        <SignedOut>
+          <div className="p-4 border rounded-lg bg-yellow-50 text-center">
+            <p className="text-lg font-semibold mb-3">¿Has probado esta burger?</p>
+            <p className="text-sm text-gray-600 mb-4">Inicia sesión para marcarla como probada y darle una puntuación ⭐</p>
+            <button
+              onClick={open}
+              className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700"
+            >
+              Iniciar sesión ahora
+            </button>
+          </div>
+        </SignedOut>
+
+        <SignedIn>
           <button
             onClick={marcarComoProbada}
             disabled={marcada || loading}
@@ -126,24 +141,24 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
           >
             {marcada ? "Ya marcada como probada ✅" : "Marcar como probada 🍔"}
           </button>
-        )}
 
-        {/* ✅ Aquí metemos el StarRating PRO, editable solo si marcada */}
-        {marcada && (
-          <div className="mt-4">
-          <StarRating
-            burgerId={burgerId}
-            usuarioId={user?.id}
-            initialRating={puntuacion}
-            onRated={(newRating) => setPuntuacion(newRating)}
-          />
-          {puntuacion === null && (
-            <p className="text-sm text-gray-400 mt-2">
-              ¿Quieres puntuarla? Solo tienes que hacer clic en las estrellas ⭐
-            </p>
+          {marcada && (
+            <div className="mt-4">
+              <StarRating
+                burgerId={burgerId}
+                usuarioId={user?.id}
+                initialRating={puntuacion}
+                onRated={(newRating) => setPuntuacion(newRating)}
+              />
+              {puntuacion === null && (
+                <p className="text-sm text-gray-400 mt-2">
+                  ¿Quieres puntuarla? Solo tienes que hacer clic en las estrellas ⭐
+                </p>
+              )}
+            </div>
           )}
-          </div>
-        )}
+        </SignedIn>
+        <SignInModal />
       </div>
     </main>
   );
