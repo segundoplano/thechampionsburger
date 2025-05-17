@@ -6,7 +6,7 @@ import StarRating from "./StarRating";
 
 export default function ProtectedMisBurgers() {
   const { user } = useUser();
-  const { open, component: signInModal } = useSignInModal(); 
+  const { open, SignInModal } = useSignInModal("/misburgers");
   const [misBurgers, setMisBurgers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
@@ -56,7 +56,7 @@ export default function ProtectedMisBurgers() {
 
   return (
     <>
-      {signInModal} {/* 👈 Aquí para que se renderice sobre todo */}
+      
 
       <SignedOut>
         <div className="p-8 text-center">
@@ -69,6 +69,8 @@ export default function ProtectedMisBurgers() {
           </button>
         </div>
       </SignedOut>
+
+      <SignInModal />
 
       <SignedIn>
         <div className="p-4">

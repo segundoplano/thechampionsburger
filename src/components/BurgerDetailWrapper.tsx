@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import { useUser, SignedOut, SignedIn } from "@clerk/clerk-react";
-import { useSignInModalBurger } from "../hooks/useSignInModalBurger";
+import { useSignInModal } from "../hooks/useSignInModal";
 import StarRating from "./StarRating";
 
 type Props = {
@@ -12,7 +12,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
   const [burger, setBurger] = useState<any>(null);
   const [alergenos, setAlergenos] = useState<any[]>([]);
   const { user } = useUser();
-  const { open, SignInModal  } = useSignInModalBurger();
+  const { open, SignInModal } = useSignInModal("/burgers");
   const [marcada, setMarcada] = useState(false);
   const [puntuacion, setPuntuacion] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
