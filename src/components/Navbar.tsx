@@ -52,7 +52,7 @@ export default function Navbar() {
                   ❌
                 </button>
                 <SignIn
-                  redirectUrl="/"
+                  redirectUrl={window.location.pathname}
                   appearance={{
                     elements: {
                       card: "shadow-xl rounded-xl",
@@ -70,7 +70,7 @@ export default function Navbar() {
         </SignedOut>
 
         <SignedIn>
-          <UserButton />
+          <UserButton afterSignOutUrl={window.location.pathname} />
         </SignedIn>
       </div>
     </nav>
