@@ -1,14 +1,14 @@
-// src/components/StarRating.tsx
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
+import { motion } from "framer-motion";
 
 type Props = {
   burgerId?: string;
   usuarioId?: string;
   initialRating: number | null;
   onRated?: (rating: number) => void;
-  readOnly?: boolean; // ← si es solo lectura
-  size?: string; // eg: text-2xl
+  readOnly?: boolean;
+  size?: string;
 };
 
 export default function StarRating({
@@ -21,6 +21,7 @@ export default function StarRating({
 }: Props) {
   const [rating, setRating] = useState(initialRating || 0);
   const [loading, setLoading] = useState(false);
+  const [mensaje, setMensaje] = useState("");
 
   async function handleRate(newRating: number) {
     if (readOnly || loading || !burgerId || !usuarioId) return;
@@ -37,24 +38,33 @@ export default function StarRating({
     if (!error) {
       setRating(newRating);
       onRated?.(newRating);
-      alert(`⭐ Has valorado esta burger con ${newRating} estrellas`);
+      setMensaje(`⭐ Has valorado esta burger con ${newRating} estrella${newRating > 1 ? "s" : ""}`);
+      setTimeout(() => setMensaje(""), 3000); // Se borra el mensaje tras 3s
     } else {
-      alert("❌ Error al guardar la puntuación");
+      setMensaje("❌ Error al guardar la puntuación");
     }
   }
 
   return (
-    <div className={`flex space-x-1 mt-2`}>
-      {[1, 2, 3, 4, 5].map((star) => (
-        <button
-          key={star}
-          onClick={() => handleRate(star)}
-          disabled={readOnly}
-          className={`${size} ${readOnly ? "cursor-default" : "cursor-pointer"} text-yellow-400`}
-        >
-          {star <= rating ? "★" : "☆"}
-        </button>
-      ))}
+    <div className="flex flex-col items-center mt-2 space-y-1">
+      <div className="flex space-x-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <motion.button
+            key={star}
+            onClick={() => handleRate(star)}
+            disabled={readOnly}
+            whileTap={{ scale: 1.2 }}
+            className={`${size} ${
+              readOnly ? "cursor-default" : "cursor-pointer"
+            } text-yellow-400 transition-transform`}
+          >
+            {star <= rating ? "★" : "☆"}
+          </motion.button>
+        ))}
+      </div>
+      {mensaje && (
+        <p className="text-sm text-gray-500 mt-1">{mensaje}</p>
+      )}
     </div>
   );
 }
