@@ -1,15 +1,19 @@
-// src/components/Navbar.tsx
-import { UserButton, SignedIn, SignedOut, useUser, SignIn } from "@clerk/clerk-react";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import {
+  UserButton,
+  SignedIn,
+  SignedOut,
+  useUser,
+  SignIn,
+} from "@clerk/clerk-react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Navbar() {
   const { user } = useUser();
   const [showModal, setShowModal] = useState(false);
-  const [pathname, setPathname] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [pathname, setPathname] = useState("");
 
-  // Se asegura de que pathname se actualice solo en cliente
   useEffect(() => {
     if (typeof window !== "undefined") {
       setPathname(window.location.pathname);
@@ -17,10 +21,12 @@ export default function Navbar() {
   }, []);
 
   const isActive = (path: string) =>
-    pathname === path ? "text-purple-600 font-semibold" : "text-gray-800 hover:text-purple-600";
+    pathname === path
+      ? "text-purple-600 underline"
+      : "text-gray-700 hover:text-purple-600";
 
   return (
-    <nav className="flex items-center justify-between px-4 py-4 bg-white shadow-md">
+   <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md text-black flex justify-between items-center px-6 py-4">
       {/* Logo */}
       <a href="/" className="flex items-center gap-2 text-xl font-bold">
         <span className="font-extrabold text-xl tracking-tight text-purple-700">
@@ -28,7 +34,7 @@ export default function Navbar() {
         </span>
       </a>
 
-      {/* Menu hamburguesa para móviles */}
+      {/* Botón hamburguesa */}
       <button
         className="lg:hidden text-2xl focus:outline-none"
         onClick={() => setMenuOpen(!menuOpen)}
@@ -38,11 +44,12 @@ export default function Navbar() {
 
       {/* Navegación desktop */}
       <div className="hidden lg:flex items-center gap-6">
-        <a href="/burger" className={`${isActive("/burger")} transition-colors`}>
+        <a href="/burger" className={`text-sm font-medium ${isActive("/burger")}`}>
           Burgers
         </a>
+
         {user && (
-          <a href="/misburgers" className={`${isActive("/misburgers")} transition-colors`}>
+          <a href="/misburgers" className={`text-sm font-medium ${isActive("/misburgers")}`}>
             Mis Burgers
           </a>
         )}
@@ -57,9 +64,37 @@ export default function Navbar() {
         </SignedOut>
 
         <SignedIn>
-          <UserButton afterSignOutUrl={window.location.pathname} />
+          <UserButton afterSignOutUrl={pathname} />
         </SignedIn>
       </div>
+
+      {/* Modal de inicio de sesión */}
+      <SignedOut>
+        {showModal && (
+          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white p-4 rounded-lg shadow-lg relative">
+              <button
+                onClick={() => setShowModal(false)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
+              >
+                ❌
+              </button>
+              <SignIn
+                redirectUrl={pathname}
+                appearance={{
+                  elements: {
+                    card: "shadow-xl rounded-xl",
+                    headerTitle: "text-2xl font-bold text-center",
+                    socialButtonsBlockButton: "bg-black hover:bg-gray-800 text-white",
+                    formFieldLabel: "text-gray-700",
+                    formButtonPrimary: "bg-purple-600 hover:bg-purple-700 text-white",
+                  },
+                }}
+              />
+            </div>
+          </div>
+        )}
+      </SignedOut>
 
       {/* Navegación móvil */}
       <AnimatePresence>
@@ -123,14 +158,13 @@ export default function Navbar() {
 
               <SignedIn>
                 <div className="pt-4">
-                  <UserButton afterSignOutUrl={window.location.pathname} />
+                  <UserButton afterSignOutUrl={pathname} />
                 </div>
               </SignedIn>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-
     </nav>
   );
 }
