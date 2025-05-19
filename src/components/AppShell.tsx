@@ -17,7 +17,7 @@ export default function AppShell({ children }: Props) {
     <ClerkProvider publishableKey={publishableKey}>
       <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="flex-1 max-w-3xl mx-auto p-4 w-full">{children}</main>
+      <main className="flex-1 w-full">{children}</main>
       <ScrollToTopButton />
       <Footer />
       </div>
