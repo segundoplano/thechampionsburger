@@ -89,10 +89,11 @@ export default function BurgersList() {
   <div className="max-w-[1200px] mx-auto px-4">
     {/* Título */}
     <div className="text-center mt-8">
-      <h1 className="text-3xl font-bold mb-2">🍔 CARTA DE HAMBURGUESAS</h1>
-      <p className="text-gray-700 max-w-xl mx-auto">
-        Aquí puedes descubrir todas las burgers participantes en The Champions Burger 2025.<br />
-        Disponemos de {allBurgers.length} burgers participantes. ¿Cuál vas a probar hoy?
+      <h1 className="text-3xl font-bold mb-2">📜 La Carta</h1>
+      <p className="mt-2 text-center text-lg text-gray-700">
+        Explora todas las hamburguesas que compiten en The Champions Burger 2025.<br />
+        Disfruta de una selección única con {allBurgers.length} participantes.<br />
+        🍔 ¿Cuál será tu favorita hoy?
       </p>
     </div>
 

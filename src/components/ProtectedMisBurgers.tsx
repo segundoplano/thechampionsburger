@@ -147,7 +147,12 @@ export default function ProtectedMisBurgers() {
 
       <SignedIn>
         <div className="p-4">
-          <h2 className="text-2xl font-bold mt-6">Tus hamburguesas guardadas 🍔</h2>
+          <h1 className="text-2xl font-bold mb-4">🍔 Mis hamburguesas degustadas</h1>
+          <p className="text-center text-lg text-gray-700 max-w-2xl mx-auto mt-6 leading-relaxed">
+            Estas son las burgers que ya has disfrutado.<br />
+            ¿Quieres cambiar alguna nota o seguir sumando nuevas experiencias?<br />
+            <span className="italic text-purple-600 font-medium">Tú mandas en tu paladar. 😋</span>
+          </p>
 
           {misBurgers.length === 0 ? (
           <div className="text-center mt-8 text-lg text-gray-600">
@@ -162,13 +167,14 @@ export default function ProtectedMisBurgers() {
           </div>
         ) : (
           <div className="text-center mt-4 text-sm text-gray-600">
-            Has probado <strong>{misBurgers.length}</strong> de <strong>{totalBurgers}</strong> burgers. ¡Sigue sumando!
+            Has probado <strong>{misBurgers.length}</strong> de <strong>{totalBurgers}</strong> hamburguesas disponibles.<br />
+            ¡Te faltan solo {totalBurgers - misBurgers.length}! 🍽️
           </div>
         )}
 
 
           {/* 🔍 Buscador */}
-          <div className="relative max-w-md mb-6">
+          <div className="relative max-w-md mx-auto mb-6">
             <input
               type="text"
               placeholder="🔍 Buscar por nombre..."
@@ -178,10 +184,10 @@ export default function ProtectedMisBurgers() {
             />
           </div>
 
-          <div className="flex flex-wrap gap-4 mb-6 items-center">
-          {/* Ordenar por */}
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium">Ordenar por:</label>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 mb-6 text-sm text-gray-800">
+            {/* Ordenar por */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+            <label className="font-medium whitespace-nowrap">Ordenar por:</label>
             <select
               value={orden}
               onChange={(e) => setOrden(e.target.value as any)}
@@ -195,8 +201,8 @@ export default function ProtectedMisBurgers() {
           </div>
 
           {/* Filtrar por puntuación */}
-          <div className="flex items-center gap-2">
-            <label className="text-sm font-medium">Filtrar puntuación:</label>
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
+            <label className="font-medium whitespace-nowrap">Filtrar puntuación:</label>
             <select
               value={filtroPuntuacion ?? ""}
               onChange={(e) =>
