@@ -1,6 +1,8 @@
 // src/components/AppShell.tsx
 import { ClerkProvider } from "@clerk/clerk-react";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 import "../styles/global.css";
 
 
@@ -15,6 +17,8 @@ export default function AppShell({ children }: Props) {
     <ClerkProvider publishableKey={publishableKey}>
       <Navbar />
       <main className="max-w-3xl mx-auto p-4">{children}</main>
+      <ScrollToTopButton />
+      <Footer />
     </ClerkProvider>
   );
 }
