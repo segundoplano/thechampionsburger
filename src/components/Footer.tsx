@@ -8,12 +8,34 @@ export default function Footer() {
         <p>
           Desarrollado con <span className="text-red-500">❤️</span> por{" "}
           <a
-            href="https://github.com/tuusuario"
+            href="https://github.com/aleexrguez"
             target="_blank"
             rel="noopener noreferrer"
             className="text-purple-600 hover:underline"
           >
-            Alex Rodríguez
+            Alex Rodríguez 
+          </a>
+          <span>
+            , &nbsp;
+          </span>
+          <a
+            href="https://github.com/lygarmo"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-600 hover:underline"
+          >
+            Lydia García
+          </a>
+          <span>
+            , &nbsp;
+          </span>
+          <a
+            href="https://github.com/natachamar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-purple-600 hover:underline"
+          >
+            Natacha del Mar
           </a>
         </p>
       </div>
