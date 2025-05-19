@@ -20,6 +20,7 @@ export default function StarRating({
   size = "text-3xl",
 }: Props) {
   const [rating, setRating] = useState(initialRating || 0);
+  const [hovered, setHovered] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [mensaje, setMensaje] = useState("");
 
@@ -48,20 +49,28 @@ export default function StarRating({
   return (
     <div className="flex flex-col items-center mt-2 space-y-1">
       <div className="flex space-x-1">
-        {[1, 2, 3, 4, 5].map((star) => (
-          <motion.button
-            key={star}
-            onClick={() => handleRate(star)}
-            disabled={readOnly}
-            whileTap={{ scale: 1.2 }}
-            className={`${size} ${
-              readOnly ? "cursor-default" : "cursor-pointer"
-            } text-yellow-400 transition-transform`}
-          >
-            {star <= rating ? "★" : "☆"}
-          </motion.button>
-        ))}
+        {[1, 2, 3, 4, 5].map((star) => {
+          const isFilled = (hovered ?? rating) >= star;
+
+          return (
+            <motion.button
+              key={star}
+              onClick={() => handleRate(star)}
+              onMouseEnter={() => !readOnly && setHovered(star)}
+              onMouseLeave={() => !readOnly && setHovered(null)}
+              disabled={readOnly}
+              whileTap={{ scale: 1.3 }}
+              whileHover={!readOnly ? { scale: 1.2 } : {}}
+              className={`${size} transition-all duration-200 ${
+                readOnly ? "cursor-default opacity-70" : "cursor-pointer hover:text-yellow-500"
+              } ${isFilled ? "text-yellow-400" : "text-gray-300"}`}
+            >
+              {isFilled ? "★" : "☆"}
+            </motion.button>
+          );
+        })}
       </div>
+
       {mensaje && (
         <p className="text-sm text-gray-500 mt-1">{mensaje}</p>
       )}
