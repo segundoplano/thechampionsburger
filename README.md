@@ -54,11 +54,12 @@ Aplicación web desarrollada para mostrar las hamburguesas participantes en el c
 
 ---
 
-## 🤔 Sobre el proyecto
+🤔 Sobre el proyecto
+Somos tres estudiantes en prácticas que actualmente colaboramos en una empresa de desarrollo web. Este proyecto ha sido realizado como parte de nuestras prácticas, combinando nuestros conocimientos en frontend, backend, diseño y gestión de datos.
 
-Esta app nace para celebrar la pasión por las hamburguesas del campeonato The Champions Burger 🍔. Queríamos ofrecer una experiencia completa para los asistentes: explorar burgers, llevar un registro personal, filtrar por alergias, puntuar... ¡y compartir sus favoritas!
+La app nace para celebrar la pasión por las hamburguesas del campeonato The Champions Burger 🍔. Queríamos ofrecer una experiencia completa para los asistentes: explorar todas las burgers, llevar un registro personalizado, puntuar, filtrar por alérgenos… ¡y descubrir nuevas favoritas!
 
-Diseñada para ser rápida, bonita y útil desde cualquier dispositivo.
+Está diseñada para ser rápida, accesible y visualmente atractiva desde cualquier dispositivo. Un proyecto hecho con cariño, código limpio y mucho hambre. 😋
 
 ---
 
