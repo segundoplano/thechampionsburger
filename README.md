@@ -74,7 +74,6 @@ Está diseñada para ser rápida, accesible y visualmente atractiva desde cualqu
 
 ---
 
->>>>>>> a45d0c64ba62b3242754120bf3fe13dc21bb5e8e
 ## 🧪 Instalación y ejecución local
 
 1. Clona el repositorio:
