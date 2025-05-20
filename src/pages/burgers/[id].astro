@@ -2,6 +2,7 @@
 // src/pages/burgers/[id].astro
 import BurgerDetailPage from "../../pages-react/BurgerDetailPage.tsx";
 import { supabase } from "../../supabaseClient";
+import "../styles/global.css";
 
 export async function getStaticPaths() {
   const { data } = await supabase.from("hamburguesas").select("id");
