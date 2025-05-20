@@ -19,6 +19,9 @@ export default function BurgerCarousel() {
   const [transition, setTransition] = useState(true);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  
 
   const resetTimeout = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -39,30 +42,48 @@ export default function BurgerCarousel() {
 
   useEffect(() => {
     if (burgers.length === 0) return;
+
     resetTimeout();
+
     timeoutRef.current = setTimeout(() => {
-      goTo(currentIndex + 1);
-    }, 5000);
+        setTransition(true); // 👈 Aseguramos que vuelve la transición
+        goTo(2);
+    }, 50);
+
     return () => resetTimeout();
-  }, [currentIndex, burgers]);
+}, [currentIndex, burgers.length]);
 
   const goTo = (index: number) => {
+    if (isAnimating) return; // 👈 evita cambios múltiples
+    setIsAnimating(true);    // 👈 bloquea
     setCurrentIndex(index);
     setTransition(true);
-  };
+    };
 
   const handleTransitionEnd = () => {
-    // Si llegamos al duplicado del final, reseteamos al primero real sin animación
+    setIsAnimating(false);
+
     if (currentIndex === burgers.length - 1) {
-      setTransition(false);
-      setCurrentIndex(1); // Primer real
+        setTransition(false);
+        setCurrentIndex(1);
+
+        // 👇 Espera un tick para reactivar el autoplay
+        setTimeout(() => {
+        setTransition(true);
+        setCurrentIndex(2); // Avanza al siguiente real después del reseteo
+        }, 50);
+    } else if (currentIndex === 0) {
+        setTransition(false);
+        setCurrentIndex(burgers.length - 2);
+
+        setTimeout(() => {
+        setTransition(true);
+        setCurrentIndex(burgers.length - 3);
+        }, 50);
     }
-    // Si vamos hacia atrás y estamos en el duplicado del principio
-    else if (currentIndex === 0) {
-      setTransition(false);
-      setCurrentIndex(burgers.length - 2); // Último real
-    }
-  };
+    };
+
+  
 
   const prev = () => goTo(currentIndex - 1);
   const next = () => goTo(currentIndex + 1);
@@ -71,7 +92,7 @@ export default function BurgerCarousel() {
 
   return (
     <section className="py-16 px-4 text-center bg-black text-white mb-16">
-      <h2 className="text-4xl font-bold mb-6">Bienvenido a Champions Burger</h2>
+      <h2 className="text-4xl font-bold mb-8">Descubre las mejores hamburguesas de este 2025</h2>
       {burgers.length === 0 ? (
         <p>Cargando hamburguesas...</p>
       ) : (
@@ -86,13 +107,15 @@ export default function BurgerCarousel() {
             </button>
             <div
                 className="overflow-hidden"
-                style={{ width: `${ITEM_WIDTH}px`, height: "600px" }}
+                style={{ width: `${ITEM_WIDTH}px`, height: "500px" }}
                 onMouseEnter={resetTimeout} 
                 onMouseLeave={() => {
+                    resetTimeout();
                     timeoutRef.current = setTimeout(() => {
-                    goTo(currentIndex + 1);
+                        goTo(currentIndex + 1);
                     }, 5000);
-                }}
+                    }}
+
                 >
               <div
                 ref={sliderRef}
@@ -114,20 +137,27 @@ export default function BurgerCarousel() {
                       <img
                         src={burger.logo_url}
                         alt={`${burger.nombre} logo`}
-                        className="w-36 h-36 object-contain mb-4 rounded-xl"
-                      />
+                        className="w-28 h-28 object-contain mb-2 rounded-xl"
+                        />
+
                     )}
+                    <div className="relative overflow-hidden group rounded-2xl mb-1 shadow-lg">
                     <img
-                      src={burger.imagen_url}
-                      alt={burger.nombre}
-                      className="rounded-xl shadow-lg object-cover mb-4"
-                      style={{
-                        maxWidth: "100%",
-                        height: "auto",
-                        maxHeight: "300px",
-                        borderRadius: "24px",
-                      }}
+                        src={burger.imagen_url}
+                        alt={burger.nombre}
+                        className="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
                     />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-500"></div>
+                    <a
+                        href={`/burgers/${burger.id}`}
+                        aria-label={`Ver detalles de la burger ${burger.nombre}`}
+                        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bg-black text-white text-sm py-2 px-6 rounded-full transition-all duration-500"
+                    >
+                        Ver detalles
+                    </a>
+                    </div>
+
+
                     <h3 className="text-3xl font-semibold text-center">{burger.nombre}</h3>
                     <p className="mt-2 text-sm italic text-center px-4">{burger.descripcion}</p>
                   </div>
@@ -148,10 +178,11 @@ export default function BurgerCarousel() {
             whileTap={{ scale: 0.95 }}
             aria-label="Ver más hamburguesas"
             onClick={() => (window.location.href = "/burger")}
-            className="mt-8 bg-purple-600 hover:bg-purple-700 text-white px-8 py-4 rounded font-semibold text-lg focus:outline-none focus:ring-4 focus:ring-purple-300"
+            className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-lg font-medium text-base focus:outline-none focus:ring-2 focus:ring-purple-300"
             >
             Ver más
             </motion.button>
+
           {/* Puntos indicadores */}
             <div className="mt-6 flex justify-center gap-2">
             {burgers.slice(1, burgers.length - 1).map((burger, index) => (

@@ -21,7 +21,7 @@ export default function Banner() {
           transition={{ duration: 1 }}
           className="text-5xl md:text-6xl font-extrabold text-white drop-shadow-lg"
         >
-          Champions Burger 🍔
+          Champions Burger 
         </motion.h1>
         <motion.p
           initial={{ y: 50, opacity: 0 }}

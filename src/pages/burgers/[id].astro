@@ -1,6 +1,18 @@
 ---
 // src/pages/burgers/[id].astro
 import BurgerDetailPage from "../../pages-react/BurgerDetailPage.tsx";
+import { supabase } from "../../supabaseClient";
+
+export async function getStaticPaths() {
+  const { data } = await supabase.from("hamburguesas").select("id");
+
+  if (!data) return [];
+
+  return data.map((burger) => ({
+    params: { id: burger.id },
+  }));
+}
+
 const { id } = Astro.params;
 ---
 
