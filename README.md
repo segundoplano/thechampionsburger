@@ -2,6 +2,7 @@
 Aplicación web desarrollada para mostrar las hamburguesas participantes en el campeonato **The Champions Burger**. Los usuarios pueden explorar burgers, marcar las que han probado, puntuar, filtrar por alérgenos y mucho más.
 
 ![Astro](https://img.shields.io/badge/Astro-Framework-blueviolet)
+![React](https://img.shields.io/badge/React-Component_Lib-61DAFB)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-CSS-38B2AC)
 ![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E)
 ![Clerk.dev](https://img.shields.io/badge/Auth-Clerk.dev-orange)
@@ -64,6 +65,7 @@ Diseñada para ser rápida, bonita y útil desde cualquier dispositivo.
 ## ⚙️ Tecnologías utilizadas
 
 - **Framework:** Astro
+- **Componentes interactivos:** React
 - **Estilos:** TailwindCSS
 - **Animaciones:** Framer Motion
 - **Backend / DB:** Supabase
