@@ -1,6 +1,8 @@
 ---
-import BurgerListPage from "../pages-react/BurgerListPage.tsx";
-import "../styles/global.css";
+import WrapperBurger from "../pages-react/WrapperBurger.tsx";
+import BaseLayout from "../Layout/BaseLayout.astro";
 ---
+<BaseLayout>
+    <WrapperBurger client:only="react" />
+</BaseLayout>
 
-<BurgerListPage client:only="react" />

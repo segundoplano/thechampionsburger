@@ -1,10 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html, body {
   overflow: visible !important;
   position: relative;
 }
+
 body {
-  @apply bg-gradient-to-b from-[#fefcf9] via-[#fff4ec] to-[#ffe0d2] text-gray-800 min-h-screen;
+  @apply bg-gradient-to-b from-[#fefcf9] via-[#fff4ec] to-[#ffe0d2] text-neutral-800 min-h-screen;
 }

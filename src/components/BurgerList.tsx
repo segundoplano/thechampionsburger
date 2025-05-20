@@ -86,7 +86,9 @@ export default function BurgersList() {
   });
 
   return (
-  <div className="max-w-[1200px] mx-auto px-4">
+
+    <div className="max-w-[1200px] mx-auto px-4 pt-24">
+
     {/* Título */}
     <div className="text-center mt-8">
       <h1 className="text-3xl font-bold mb-2">📜 La Carta</h1>

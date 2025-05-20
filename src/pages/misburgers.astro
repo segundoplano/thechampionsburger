@@ -1,6 +1,7 @@
 ---
-import MisBurgersPage from "../pages-react/MisBurgersPage.tsx";
-import "../styles/global.css";
+import WrapperMisBurgers from "../pages-react/WrapperMisBurgers.tsx";
+import BaseLayout from "../Layout/BaseLayout.astro";
 ---
-
-<MisBurgersPage client:only="react" />
+<BaseLayout>
+    <WrapperMisBurgers client:only="react" />
+</BaseLayout>

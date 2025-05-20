@@ -1,11 +1,9 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
-
 import react from '@astrojs/react';
-import clerk from "@clerk/astro";
+import tailwind from '@astrojs/tailwind';
+import clerk from '@clerk/astro';
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [react(),clerk()],
+  integrations: [tailwind(), react(), clerk()],
   output: 'static',
 });

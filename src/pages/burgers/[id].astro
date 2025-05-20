@@ -1,12 +1,12 @@
 ---
 // src/pages/burgers/[id].astro
-import BurgerDetailPage from "../../pages-react/BurgerDetailPage.tsx";
+import BaseLayout from "../../Layout/BaseLayout.astro";
+import WrapperDetail from "../../pages-react/WrapperDetail.tsx";
 import { supabase } from "../../supabaseClient";
 import "../../styles/global.css";
 
 export async function getStaticPaths() {
   const { data } = await supabase.from("hamburguesas").select("id");
-
   if (!data) return [];
 
   return data.map((burger) => ({
@@ -17,4 +17,6 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 ---
 
-<BurgerDetailPage burgerId={id} client:only="react" />
+<BaseLayout>
+  <WrapperDetail burgerId={id} client:only="react" />
+</BaseLayout>

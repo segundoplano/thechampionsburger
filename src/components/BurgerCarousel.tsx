@@ -15,13 +15,10 @@ const ITEM_WIDTH = 400;
 
 export default function BurgerCarousel() {
   const [burgers, setBurgers] = useState<Burger[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(1); // Empezamos en el "primer real"
+  const [currentIndex, setCurrentIndex] = useState(1);
   const [transition, setTransition] = useState(true);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const sliderRef = useRef<HTMLDivElement>(null);
   const [isAnimating, setIsAnimating] = useState(false);
-
-  
 
   const resetTimeout = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -32,7 +29,6 @@ export default function BurgerCarousel() {
       const { data, error } = await supabase.from<Burger>("hamburguesas").select("*").limit(5);
       if (error) return console.error("Error cargando hamburguesas:", error);
       if (data && data.length > 0) {
-        // Agregamos el primero al final y el último al principio para el efecto infinito
         const extended = [data[data.length - 1], ...data, data[0]];
         setBurgers(extended);
       }
@@ -44,50 +40,33 @@ export default function BurgerCarousel() {
     if (burgers.length === 0) return;
 
     resetTimeout();
-
     timeoutRef.current = setTimeout(() => {
-        setTransition(true); // 👈 Aseguramos que vuelve la transición
-        goTo(2);
-    }, 50);
+      goTo(currentIndex + 1);
+    }, 5000);
 
     return () => resetTimeout();
-}, [currentIndex, burgers.length]);
+  }, [currentIndex, burgers.length]);
 
   const goTo = (index: number) => {
-    if (isAnimating) return; // 👈 evita cambios múltiples
-    setIsAnimating(true);    // 👈 bloquea
-    setCurrentIndex(index);
+    if (isAnimating) return;
+    setIsAnimating(true);
     setTransition(true);
-    };
+    setCurrentIndex(index);
+  };
 
   const handleTransitionEnd = () => {
     setIsAnimating(false);
-
     if (currentIndex === burgers.length - 1) {
-        setTransition(false);
-        setCurrentIndex(1);
-
-        // 👇 Espera un tick para reactivar el autoplay
-        setTimeout(() => {
-        setTransition(true);
-        setCurrentIndex(2); // Avanza al siguiente real después del reseteo
-        }, 50);
+      setTransition(false);
+      setCurrentIndex(1);
     } else if (currentIndex === 0) {
-        setTransition(false);
-        setCurrentIndex(burgers.length - 2);
-
-        setTimeout(() => {
-        setTransition(true);
-        setCurrentIndex(burgers.length - 3);
-        }, 50);
+      setTransition(false);
+      setCurrentIndex(burgers.length - 2);
     }
-    };
-
-  
+  };
 
   const prev = () => goTo(currentIndex - 1);
   const next = () => goTo(currentIndex + 1);
-
   const transformValue = `translateX(-${currentIndex * ITEM_WIDTH}px)`;
 
   return (
@@ -99,26 +78,24 @@ export default function BurgerCarousel() {
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-center gap-8 relative">
             <button
-            onClick={prev}
-            aria-label="Anterior hamburguesa"
-            className="bg-white text-black px-6 py-3 rounded text-2xl font-bold z-20 transition-transform hover:scale-110 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              onClick={prev}
+              aria-label="Anterior hamburguesa"
+              className="bg-white text-black px-6 py-3 rounded text-2xl font-bold z-20 transition-transform hover:scale-110 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
               ‹
             </button>
             <div
-                className="overflow-hidden"
-                style={{ width: `${ITEM_WIDTH}px`, height: "500px" }}
-                onMouseEnter={resetTimeout} 
-                onMouseLeave={() => {
-                    resetTimeout();
-                    timeoutRef.current = setTimeout(() => {
-                        goTo(currentIndex + 1);
-                    }, 5000);
-                    }}
-
-                >
+              className="overflow-hidden"
+              style={{ width: `${ITEM_WIDTH}px`, height: "500px" }}
+              onMouseEnter={resetTimeout}
+              onMouseLeave={() => {
+                resetTimeout();
+                timeoutRef.current = setTimeout(() => {
+                  goTo(currentIndex + 1);
+                }, 5000);
+              }}
+            >
               <div
-                ref={sliderRef}
                 className="flex"
                 style={{
                   width: `${burgers.length * ITEM_WIDTH}px`,
@@ -138,26 +115,23 @@ export default function BurgerCarousel() {
                         src={burger.logo_url}
                         alt={`${burger.nombre} logo`}
                         className="w-28 h-28 object-contain mb-2 rounded-xl"
-                        />
-
+                      />
                     )}
                     <div className="relative overflow-hidden group rounded-2xl mb-1 shadow-lg">
-                    <img
+                      <img
                         src={burger.imagen_url}
                         alt={burger.nombre}
                         className="w-full h-64 object-cover transform transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-500"></div>
-                    <a
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-500"></div>
+                      <a
                         href={`/burgers/${burger.id}`}
                         aria-label={`Ver detalles de la burger ${burger.nombre}`}
                         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bg-black text-white text-sm py-2 px-6 rounded-full transition-all duration-500"
-                    >
+                      >
                         Ver detalles
-                    </a>
+                      </a>
                     </div>
-
-
                     <h3 className="text-3xl font-semibold text-center">{burger.nombre}</h3>
                     <p className="mt-2 text-sm italic text-center px-4">{burger.descripcion}</p>
                   </div>
@@ -165,11 +139,11 @@ export default function BurgerCarousel() {
               </div>
             </div>
             <button
-            onClick={next}
-            aria-label="Siguiente hamburguesa"
-            className="bg-white text-black px-6 py-3 rounded text-2xl font-bold z-20 transition-transform hover:scale-110 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              onClick={next}
+              aria-label="Siguiente hamburguesa"
+              className="bg-white text-black px-6 py-3 rounded text-2xl font-bold z-20 transition-transform hover:scale-110 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-500"
             >
-            ›
+              ›
             </button>
           </div>
 
@@ -179,25 +153,24 @@ export default function BurgerCarousel() {
             aria-label="Ver más hamburguesas"
             onClick={() => (window.location.href = "/burger")}
             className="mt-4 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2 rounded-lg font-medium text-base focus:outline-none focus:ring-2 focus:ring-purple-300"
-            >
+          >
             Ver más
-            </motion.button>
+          </motion.button>
 
-          {/* Puntos indicadores */}
-            <div className="mt-6 flex justify-center gap-2">
+          <div className="mt-6 flex justify-center gap-2">
             {burgers.slice(1, burgers.length - 1).map((burger, index) => (
-                <button
+              <button
                 key={index}
                 onClick={() => goTo(index + 1)}
                 aria-label={`Ir a la hamburguesa ${burger.nombre}`}
                 className={`text-2xl transition-all duration-200 transform hover:scale-150 focus:outline-none focus:ring-2 focus:ring-white rounded-full ${
-                    currentIndex === index + 1 ? "text-white" : "text-white/40"
+                  currentIndex === index + 1 ? "text-white" : "text-white/40"
                 }`}
-                >
+              >
                 {currentIndex === index + 1 ? "●" : "○"}
-                </button>
+              </button>
             ))}
-            </div>
+          </div>
         </div>
       )}
     </section>
