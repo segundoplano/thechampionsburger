@@ -28,11 +28,14 @@ export default function Navbar() {
   return (
    <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md text-black flex justify-between items-center px-6 py-4">
       {/* Logo */}
-      <a href="/" className="flex items-center gap-2 text-xl font-bold">
-        <span className="font-extrabold text-xl tracking-tight text-purple-700">
-          Champions <span className="text-gray-800">Burger</span>
-        </span>
+      <a
+        href="/"
+        className="inline-block px-4 py-2 text-xl font-extrabold tracking-tight text-purple-700 hover:scale-105 transition-transform duration-200"
+      >
+        Champions <span className="text-gray-800">Burger</span>
       </a>
+
+
 
       {/* Botón hamburguesa */}
       <button
@@ -44,12 +47,20 @@ export default function Navbar() {
 
       {/* Navegación desktop */}
       <div className="hidden lg:flex items-center gap-6">
-        <a href="/burger" className={`text-sm font-medium ${isActive("/burger")}`}>
+        <a
+      href="/burger"
+      className={`text-sm font-medium transition-transform duration-200 hover:scale-105 ${isActive("/burger")}`}
+    >
+
           Burgers
         </a>
 
         {user && (
-          <a href="/misburgers" className={`text-sm font-medium ${isActive("/misburgers")}`}>
+          <a
+          href="/misburgers"
+          className={`text-sm font-medium transition-transform duration-200 hover:scale-105 ${isActive("/misburgers")}`}
+        >
+
             Mis Burgers
           </a>
         )}
@@ -57,7 +68,7 @@ export default function Navbar() {
         <SignedOut>
           <button
             onClick={() => setShowModal(true)}
-            className="text-sm font-medium bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition"
+            className="text-sm font-medium bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 hover:scale-105 transition-transform duration-200"
           >
             Iniciar sesión
           </button>
@@ -127,8 +138,8 @@ export default function Navbar() {
               </button>
 
               <a
-                href="/burger"
-                className={`${isActive("/burger")} text-lg transition-colors`}
+                href="/misburgers"
+                className={`${isActive("/misburgers")} text-lg transition-transform duration-200 hover:scale-105`}
                 onClick={() => setMenuOpen(false)}
               >
                 🍔 Burgers
