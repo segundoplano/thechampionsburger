@@ -9,7 +9,7 @@ Aplicación web desarrollada para mostrar las hamburguesas participantes en el c
 
 
 ## 🔥 Demo en vivo
-[http://cb.lygarmo.com/]
+![http://cb.lygarmo.com/](https://cb-lygarmo.com)
 
 ---
 
