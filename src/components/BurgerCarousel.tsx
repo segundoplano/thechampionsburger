@@ -70,7 +70,7 @@ export default function BurgerCarousel() {
   const transformValue = `translateX(-${currentIndex * ITEM_WIDTH}px)`;
 
   return (
-    <section className="py-16 px-4 text-center bg-black text-white mb-16">
+    <section className="py-16 px-4 text-center bg-black text-white">
       <h2 className="text-4xl font-bold mb-8">Descubre las mejores hamburguesas de este 2025</h2>
       {burgers.length === 0 ? (
         <p>Cargando hamburguesas...</p>
