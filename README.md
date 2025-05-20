@@ -1,5 +1,12 @@
-# 🍔 The Champions Burger
+# 🍔 The Champions Burger – La app definitiva del campeonato de hamburguesas
 Aplicación web desarrollada para mostrar las hamburguesas participantes en el campeonato **The Champions Burger**. Los usuarios pueden explorar burgers, marcar las que han probado, puntuar, filtrar por alérgenos y mucho más.
+
+![Astro](https://img.shields.io/badge/Astro-Framework-blueviolet)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-CSS-38B2AC)
+![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E)
+![Clerk.dev](https://img.shields.io/badge/Auth-Clerk.dev-orange)
+![Hackatón Clerk](https://img.shields.io/badge/Hackat%C3%B3n-Clerk-FF4081)
+
 
 ## 🔥 Demo en vivo
 [http://cb.lygarmo.com/]
