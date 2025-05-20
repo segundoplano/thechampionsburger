@@ -109,22 +109,16 @@ Diseñada para ser rápida, bonita y útil desde cualquier dispositivo.
 | ![Alessandro](https://github.com/user-attachments/assets/582da696-8b98-4e62-b3c6-b6d5e79a88a9) | ![Natacha](https://github.com/user-attachments/assets/7b5dc2db-f474-418f-ae56-a328308c9197) | ![Lydia](https://github.com/user-attachments/assets/e74da348-9e90-41e0-b553-2dc48e585e78) |
 |:--:|:--:|:--:|
 
-### (![image](https://github.com/user-attachments/assets/582da696-8b98-4e62-b3c6-b6d5e79a88a9)
-)  
 **Alessandro**  
 Responsable del backend de la aplicación. Desarrolló la lógica del servidor, gestionó las rutas, la comunicación con la base de datos y aseguró el correcto funcionamiento de la API.
 
 ---
 
-### (![image](https://github.com/user-attachments/assets/7b5dc2db-f474-418f-ae56-a328308c9197)
-)  
 **Natacha**  
 Encargada del diseño visual y los estilos de la página. Desarrolló una interfaz atractiva, coherente y adaptable, mejorando la experiencia del usuario mediante una estética moderna y funcional.
 
 ---
-
-### (![image](https://github.com/user-attachments/assets/e74da348-9e90-41e0-b553-2dc48e585e78)
-)  
+ 
 **Lydia**  
 Responsable del diseño y gestión de la base de datos. Me encargué de estructurar y optimizar el almacenamiento de la información para garantizar una integración fluida con el backend y un acceso eficiente desde el sistema de autenticación.
 
