@@ -1,48 +1,104 @@
-# Astro Starter Kit: Basics
+# 🍔 The Champions Burger
+Aplicación web desarrollada para mostrar las hamburguesas participantes en el campeonato **The Champions Burger**. Los usuarios pueden explorar burgers, marcar las que han probado, puntuar, filtrar por alérgenos y mucho más.
 
-```sh
-npm create astro@latest -- --template basics
-```
+## 🔥 Demo en vivo
+[http://cb.lygarmo.com/]
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## ✨ Funcionalidades principales
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### 🧭 Navegación
+- Página pública con hamburguesas participantes.
+- Página de detalles para cada burger.
+- Vista personalizada de "mis burgers" con autenticación.
 
-## 🚀 Project Structure
+### 🧠 UX / Experiencia de usuario
+- Filtros por hamburguesas probadas / no probadas.
+- Filtro por nombre, alérgenos, puntuación.
+- Buscador inteligente en tiempo real.
+- Feedback visual con mensajes dinámicos.
+- Diseño responsive y accesible.
 
-Inside of your Astro project, you'll see the following folders and files:
+### 🍔 Página /burgers
+- Listado en grid con imagen, descripción, restaurante e iconos de alérgenos.
+- Estado de “Probada” visible si aplica.
+- Scroll infinito con carga progresiva y skeletons.
+- Interfaz cuidada con animaciones fluidas (Framer Motion).
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### ⭐ Página /burgers/[id]
+- Detalle de burger con información completa.
+- Si el usuario está logueado: marcar como probada y puntuar.
+- Si no está logueado: mensaje + CTA para iniciar sesión.
+- Transiciones suaves y layout elegante.
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+### ✅ Página /misburgers
+- Listado personalizado de hamburguesas probadas.
+- Filtros avanzados y ordenación por puntuación.
+- Edición y eliminación de puntuaciones.
+- Modal de confirmación para eliminar.
 
-## 🧞 Commands
+---
 
-All commands are run from the root of the project, from a terminal:
+## ⚙️ Tecnologías utilizadas
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- **Framework:** Astro
+- **Estilos:** TailwindCSS
+- **Animaciones:** Framer Motion
+- **Backend / DB:** Supabase
+- **Auth:** Clerk.dev
 
-## 👀 Want to learn more?
+---
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 🧪 Instalación y ejecución local
+
+1. Clona el repositorio:
+
+   ```bash
+   git clone https://github.com/segundoplanothechampionsburger.git
+   ```
+
+2. Entra en la carpeta de tu proyecto
+    ```bash
+   cd thechampionsburger
+   ```
+
+3. Instala las dependencias
+    ```bash
+   npm install
+   ```
+
+4. Crea tu archivo .env con las claves necesarias
+    ```bash
+    PUBLIC_CLERK_PUBLISHABLE_KEY=tu_clave_clerk
+    PUBLIC_SUPABASE_URL=tu_url_supabase
+    PUBLIC_SUPABASE_ANON_KEY=tu_clave_anon
+    ```
+5. Inicia tu servidor local
+    ```bash
+    npm run dev
+    ```
+---
+
+## 🧑‍🤝‍🧑 Colaboradores
+
+### ![Alessandro](imagen)  
+**Alessandro**  
+Responsable del backend de la aplicación. Desarrolló la lógica del servidor, gestionó las rutas, la comunicación con la base de datos y aseguró el correcto funcionamiento de la API.
+
+---
+
+### ![Natacha](imagen)  
+**Natacha**  
+Encargada del diseño visual y los estilos de la página. Desarrolló una interfaz atractiva, coherente y adaptable, mejorando la experiencia del usuario mediante una estética moderna y funcional.
+
+---
+
+### ![Lydia](himagen)  
+**Lydia**  
+Responsable del diseño y gestión de la base de datos. Me encargué de estructurar y optimizar el almacenamiento de la información para garantizar una integración fluida con el backend y un acceso eficiente desde el sistema de autenticación.
+
+---
+
+## 🧾 Licencia
+Este proyecto está bajo la licencia MIT.
