@@ -106,6 +106,9 @@ Diseñada para ser rápida, bonita y útil desde cualquier dispositivo.
 
 ## 🧑‍🤝‍🧑 Colaboradores
 
+| ![Alessandro](https://github.com/user-attachments/assets/582da696-8b98-4e62-b3c6-b6d5e79a88a9) | ![Natacha](https://github.com/user-attachments/assets/7b5dc2db-f474-418f-ae56-a328308c9197) | ![Lydia](https://github.com/user-attachments/assets/e74da348-9e90-41e0-b553-2dc48e585e78) |
+|:--:|:--:|:--:|
+
 ### (![image](https://github.com/user-attachments/assets/582da696-8b98-4e62-b3c6-b6d5e79a88a9)
 )  
 **Alessandro**  
