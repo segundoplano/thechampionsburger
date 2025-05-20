@@ -1,5 +1,8 @@
 ---
-import HomePage from "../pages-react/HomePage.tsx";
+import BaseLayout from "../Layout/BaseLayout.astro";
+import Wrapper from "../pages-react/Wrapper.tsx";
 ---
 
-<HomePage client:only="react" />
+<BaseLayout>
+  <Wrapper client:only="react" />
+</BaseLayout>

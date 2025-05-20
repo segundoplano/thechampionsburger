@@ -50,6 +50,83 @@ Aplicación web desarrollada para mostrar las hamburguesas participantes en el c
 
 ---
 
+=======
+# 🍔 The Champions Burger – La app definitiva del campeonato de hamburguesas
+Aplicación web desarrollada para mostrar las hamburguesas participantes en el campeonato **The Champions Burger**. Los usuarios pueden explorar burgers, marcar las que han probado, puntuar, filtrar por alérgenos y mucho más.
+
+![Astro](https://img.shields.io/badge/Astro-Framework-blueviolet)
+![React](https://img.shields.io/badge/React-Component_Lib-61DAFB)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-CSS-38B2AC)
+![Supabase](https://img.shields.io/badge/Supabase-Backend-3ECF8E)
+![Clerk.dev](https://img.shields.io/badge/Auth-Clerk.dev-orange)
+![Hackatón Clerk](https://img.shields.io/badge/Hackat%C3%B3n-Clerk-FF4081)
+
+
+## 🔥 Demo en vivo
+[cb.lygarmo.com](http://cb.lygarmo.com/)
+
+![Home]![image](https://github.com/user-attachments/assets/7ceb0432-8567-4d08-81a4-7ba561b5c82e)
+
+![Burgers]![image](https://github.com/user-attachments/assets/c171eac7-1bce-4dc0-bc0d-054c92e89af3)
+
+![Mis burgers]
+
+---
+
+## ✨ Funcionalidades principales
+
+### 🧭 Navegación
+- Página pública con hamburguesas participantes.
+- Página de detalles para cada burger.
+- Vista personalizada de "mis burgers" con autenticación.
+
+### 🧠 UX / Experiencia de usuario
+- Filtros por hamburguesas probadas / no probadas.
+- Filtro por nombre, alérgenos, puntuación.
+- Buscador inteligente en tiempo real.
+- Feedback visual con mensajes dinámicos.
+- Diseño responsive y accesible.
+
+### 🍔 Página /burgers
+- Listado en grid con imagen, descripción, restaurante e iconos de alérgenos.
+- Estado de “Probada” visible si aplica.
+- Scroll infinito con carga progresiva y skeletons.
+- Interfaz cuidada con animaciones fluidas (Framer Motion).
+
+### ⭐ Página /burgers/[id]
+- Detalle de burger con información completa.
+- Si el usuario está logueado: marcar como probada y puntuar.
+- Si no está logueado: mensaje + CTA para iniciar sesión.
+- Transiciones suaves y layout elegante.
+
+### ✅ Página /misburgers
+- Listado personalizado de hamburguesas probadas.
+- Filtros avanzados y ordenación por puntuación.
+- Edición y eliminación de puntuaciones.
+- Modal de confirmación para eliminar.
+
+---
+
+## 🤔 Sobre el proyecto
+
+Esta app nace para celebrar la pasión por las hamburguesas del campeonato The Champions Burger 🍔. Queríamos ofrecer una experiencia completa para los asistentes: explorar burgers, llevar un registro personal, filtrar por alergias, puntuar... ¡y compartir sus favoritas!
+
+Diseñada para ser rápida, bonita y útil desde cualquier dispositivo.
+
+---
+
+## ⚙️ Tecnologías utilizadas
+
+- **Framework:** Astro
+- **Componentes interactivos:** React
+- **Estilos:** TailwindCSS
+- **Animaciones:** Framer Motion
+- **Backend / DB:** Supabase
+- **Auth:** Clerk.dev
+
+---
+
+>>>>>>> a45d0c64ba62b3242754120bf3fe13dc21bb5e8e
 ## 🧪 Instalación y ejecución local
 
 1. Clona el repositorio:

@@ -35,7 +35,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="text-purple-600 hover:underline"
           >
-            Natacha del Mar
+            Natacha del Mar Aguilera
           </a>
         </p>
       </div>
