@@ -111,6 +111,7 @@ Está diseñada para ser rápida, accesible y visualmente atractiva desde cualqu
 | **Alessandro**<br>Responsable del backend de la aplicación. Desarrolló la lógica del servidor, gestionó las rutas, la comunicación con la base de datos y aseguró el correcto funcionamiento de la API. | **Natacha**<br>Encargada del diseño visual y los estilos de la página. Desarrolló una interfaz atractiva, coherente y adaptable, mejorando la experiencia del usuario mediante una estética moderna y funcional. | **Lydia**<br>Responsable del diseño y gestión de la base de datos. Se encargó de estructurar y optimizar el almacenamiento de la información para garantizar una integración fluida con el backend y un acceso eficiente desde el sistema de autenticación. |
 
 
+---
 
 ## 🧾 Licencia
 Este proyecto está bajo la licencia MIT.
