@@ -9,7 +9,13 @@ Aplicación web desarrollada para mostrar las hamburguesas participantes en el c
 
 
 ## 🔥 Demo en vivo
-![http://cb.lygarmo.com/](https://cb-lygarmo.com)
+[cb.lygarmo.com](http://cb.lygarmo.com/)
+
+![Home]![image](https://github.com/user-attachments/assets/7ceb0432-8567-4d08-81a4-7ba561b5c82e)
+
+![Burgers]![image](https://github.com/user-attachments/assets/c171eac7-1bce-4dc0-bc0d-054c92e89af3)
+
+![Mis burgers]
 
 ---
 
@@ -44,6 +50,14 @@ Aplicación web desarrollada para mostrar las hamburguesas participantes en el c
 - Filtros avanzados y ordenación por puntuación.
 - Edición y eliminación de puntuaciones.
 - Modal de confirmación para eliminar.
+
+---
+
+## 🤔 Sobre el proyecto
+
+Esta app nace para celebrar la pasión por las hamburguesas del campeonato The Champions Burger 🍔. Queríamos ofrecer una experiencia completa para los asistentes: explorar burgers, llevar un registro personal, filtrar por alergias, puntuar... ¡y compartir sus favoritas!
+
+Diseñada para ser rápida, bonita y útil desde cualquier dispositivo.
 
 ---
 
