@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-react";
-import { useSignInModal } from "../hooks/useAuthModal";
+import { useAuthModal } from "../hooks/useAuthModal";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import StarRating from "./StarRating";
@@ -10,7 +10,7 @@ export default function ProtectedMisBurgers() {
   const { user } = useUser();
   const [orden, setOrden] = useState<"mas-alta" | "mas-baja" | "">("");
   const [filtroPuntuacion, setFiltroPuntuacion] = useState<number | null>(null);
-  const { open, SignInModal } = useSignInModal("/misburgers");
+  const { open, AuthModal } = useAuthModal("/misburgers");
   const [misBurgers, setMisBurgers] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [searchText, setSearchText] = useState("");
@@ -146,7 +146,7 @@ export default function ProtectedMisBurgers() {
         </div>
       </SignedOut>
 
-      <SignInModal />
+      <AuthModal />
 
       <SignedIn>
         <div className="max-w-[1200px] mx-auto px-4 pt-24">
