@@ -4,6 +4,7 @@ import {
   SignedOut,
   useUser,
   SignIn,
+  SignUp,
 } from "@clerk/clerk-react";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -13,6 +14,7 @@ export default function Navbar() {
   const [showModal, setShowModal] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [pathname, setPathname] = useState("");
+  const [modalType, setModalType] = useState<"signin" | "signup">("signin");
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -66,13 +68,27 @@ export default function Navbar() {
         )}
 
         <SignedOut>
+        <div className="flex gap-2">
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => {
+              setModalType("signin");
+              setShowModal(true);
+            }}
             className="text-sm font-medium bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 hover:scale-105 transition-transform duration-200"
           >
             Iniciar sesión
           </button>
-        </SignedOut>
+          <button
+            onClick={() => {
+              setModalType("signup");
+              setShowModal(true);
+            }}
+            className="text-sm font-medium bg-white border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-100 hover:scale-105 transition-transform duration-200"
+          >
+            Registrarse
+          </button>
+        </div>
+      </SignedOut>
 
         <SignedIn>
           <UserButton afterSignOutUrl={pathname} />
@@ -80,35 +96,57 @@ export default function Navbar() {
       </div>
 
       {/* Modal de inicio de sesión */}
-      <SignedOut>
-        {showModal && (
-          <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            {/* ❌ personalizada fuera del card */}
-            <button
-              onClick={() => setShowModal(false)}
-              className="absolute top-6 right-6 z-50 text-gray-400 hover:text-gray-600 text-3xl leading-none"
-            >
-              ×
-            </button>
+      
+    <SignedOut>
+      {showModal && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <button
+            onClick={() => setShowModal(false)}
+            className="absolute top-6 right-6 z-50 text-gray-400 hover:text-gray-600 text-3xl leading-none"
+          >
+            ×
+          </button>
 
+          {modalType === "signin" ? (
             <SignIn
               redirectUrl={pathname}
               appearance={{
                 elements: {
-                  closeButton: "hidden", // ocultamos la X por defecto de Clerk
+                  closeButton: "hidden",
                   card: "rounded-xl shadow-2xl border border-gray-200",
                   headerTitle: "text-xl font-bold",
-                  socialButtonsBlockButton: "bg-white border hover:bg-gray-100 text-black",
-                  formFieldInput: "rounded-md border-gray-300 focus:ring-purple-500",
+                  socialButtonsBlockButton:
+                    "bg-white border hover:bg-gray-100 text-black",
+                  formFieldInput:
+                    "rounded-md border-gray-300 focus:ring-purple-500",
                   footerActionLink: "text-purple-600 hover:underline",
-                  formButtonPrimary: "bg-purple-600 hover:bg-purple-700 text-white",
+                  formButtonPrimary:
+                    "bg-purple-600 hover:bg-purple-700 text-white",
                 },
               }}
             />
-          </div>
-        )}
-      </SignedOut>
-
+          ) : (
+            <SignUp
+              redirectUrl={pathname}
+              appearance={{
+                elements: {
+                  closeButton: "hidden",
+                  card: "rounded-xl shadow-2xl border border-gray-200",
+                  headerTitle: "text-xl font-bold",
+                  socialButtonsBlockButton:
+                    "bg-white border hover:bg-gray-100 text-black",
+                  formFieldInput:
+                    "rounded-md border-gray-300 focus:ring-purple-500",
+                  footerActionLink: "text-purple-600 hover:underline",
+                  formButtonPrimary:
+                    "bg-purple-600 hover:bg-purple-700 text-white",
+                },
+              }}
+            />
+          )}
+        </div>
+      )}
+    </SignedOut>
 
       {/* Navegación móvil */}
       <AnimatePresence>

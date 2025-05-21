@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import { useUser, SignedOut, SignedIn } from "@clerk/clerk-react";
-import { useSignInModal } from "../hooks/useSignInModal";
+import { useAuthModal } from "../hooks/useAuthModal";
 import StarRating from "./StarRating";
 import { motion, AnimatePresence } from "framer-motion";
 import { Lock } from "lucide-react";
@@ -16,7 +16,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
   const [burger, setBurger] = useState<any>(null);
   const [alergenos, setAlergenos] = useState<any[]>([]);
   const { user } = useUser();
-  const { open, SignInModal } = useSignInModal("/burger");
+  const { open, AuthModal } = useAuthModal("/burger");
   const [marcada, setMarcada] = useState(false);
   const [puntuacion, setPuntuacion] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
@@ -172,28 +172,35 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
             {/* Botón y puntuación */}
             <div className="pt-4">
               <SignedOut>
-                <div className="p-5 border rounded-lg bg-yellow-50 text-center shadow-md space-y-4">
-                  <p className="text-lg font-semibold">¿Has probado esta burger?</p>
+              <div className="p-5 border rounded-lg bg-yellow-50 text-center shadow-md space-y-4">
+                <p className="text-lg font-semibold">¿Has probado esta burger?</p>
 
-                  <p className="flex justify-center items-center gap-1 text-sm text-gray-600">
-                    <Lock className="w-4 h-4 text-gray-400" />
-                    Inicia sesión para marcarla como probada y darle una puntuación
-                  </p>
-
-                  <button
-                  onClick={() => open({ redirectUrl: window.location.pathname })}
-                  className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transform transition-transform duration-200 hover:scale-105 shadow-lg shadow-yellow-100/40"
-                >
-                  Iniciar sesión ahora
-                </button>
-
-
-                </div>
-                <p className="text-xs text-gray-400 mt-1">
-                  Te llevará al login y volverás aquí automáticamente.
+                <p className="flex justify-center items-center gap-1 text-sm text-gray-600">
+                  <Lock className="w-4 h-4 text-gray-400" />
+                  Inicia sesión para marcarla como probada y darle una puntuación
                 </p>
 
-              </SignedOut>
+                <div className="flex justify-center gap-2">
+                  <button
+                    onClick={() => open({ redirectUrl, mode: "signin" })}
+                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transform transition-transform duration-200 hover:scale-105 shadow-lg shadow-yellow-100/40"
+                  >
+                    Iniciar sesión
+                  </button>
+                  <button
+                    onClick={() => open({ redirectUrl, mode: "signup" })}
+                    className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-100 transform transition-transform duration-200 hover:scale-105 shadow-lg shadow-yellow-100/40"
+                  >
+                    Registrarse
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-xs text-gray-400 mt-1">
+                Te llevará al login y volverás aquí automáticamente.
+              </p>
+            </SignedOut>
+
 
 
               <SignedIn>
@@ -263,7 +270,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
                   )}
                 </AnimatePresence>
               </SignedIn>
-              <SignInModal />
+              <AuthModal />
             </div>
           </motion.div>
         </div>

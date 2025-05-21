@@ -1,5 +1,5 @@
 import { SignedIn, SignedOut, useUser } from "@clerk/clerk-react";
-import { useSignInModal } from "../hooks/useSignInModal";
+import { useSignInModal } from "../hooks/useAuthModal";
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import StarRating from "./StarRating";
