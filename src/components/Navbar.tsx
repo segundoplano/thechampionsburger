@@ -49,7 +49,7 @@ export default function Navbar() {
       <div className="hidden lg:flex items-center gap-6">
         <a
       href="/burger"
-      className={`text-sm font-medium transition-transform duration-200 hover:scale-105 ${isActive("/burger")}`}
+      className={`text-sm no-underline font-medium transition-transform duration-200 hover:scale-105 ${isActive("/burger")}`}
     >
 
           Burgers
@@ -58,7 +58,7 @@ export default function Navbar() {
         {user && (
           <a
           href="/misburgers"
-          className={`text-sm font-medium transition-transform duration-200 hover:scale-105 ${isActive("/misburgers")}`}
+          className={`text-sm no-underline font-medium transition-transform duration-200 hover:scale-105 ${isActive("/misburgers")}`}
         >
 
             Mis Burgers
@@ -141,22 +141,23 @@ export default function Navbar() {
               </button>
 
               <a
+              href="/burger"
+              className={`text-lg font-medium ${isActive("/burger")} no-underline hover:text-purple-600 hover:scale-105 transition duration-200`}
+              onClick={() => setMenuOpen(false)}
+            >
+              🍔 Burgers
+            </a>
+
+            {user && (
+              <a
                 href="/misburgers"
-                className={`${isActive("/misburgers")} text-lg transition-transform duration-200 hover:scale-105`}
+                className={`text-lg font-medium ${isActive("/misburgers")} no-underline hover:text-purple-600 hover:scale-105 transition duration-200`}
                 onClick={() => setMenuOpen(false)}
               >
-                🍔 Burgers
+                ⭐ Mis Burgers
               </a>
+            )}
 
-              {user && (
-                <a
-                  href="/misburgers"
-                  className={`${isActive("/misburgers")} text-lg transition-colors`}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  ⭐ Mis Burgers
-                </a>
-              )}
 
               <SignedOut>
                 <button

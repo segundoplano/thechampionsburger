@@ -18,6 +18,7 @@ export default function ProtectedMisBurgers() {
   const [burgerToDelete, setBurgerToDelete] = useState<string | null>(null);
   const [selectedAlergenos, setSelectedAlergenos] = useState<string[]>([]);
   const [totalBurgers, setTotalBurgers] = useState(0);
+  
 
 
   useEffect(() => {

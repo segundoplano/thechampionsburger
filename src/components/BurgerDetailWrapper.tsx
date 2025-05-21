@@ -139,7 +139,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
         </div>
 
         {/* Columna derecha */}
-        <div className="md:basis-1/2 space-y-5">
+        <div className="md:basis-1/2 space-y-5 text-center md:text-left mx-auto">
           <motion.div
             className="md:basis-1/2 space-y-5"
             initial={{ opacity: 0, x: 50 }}
@@ -150,7 +150,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
 
             <div className="mt-4">
               <h3 className="font-semibold text-sm text-gray-600 mb-2">Contiene:</h3>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap justify-center md:justify-start gap-2">
                 {alergenos.map((item) => (
                   <div
                     key={item.alergenos.nombre}
@@ -205,7 +205,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
                       transition={{ duration: 0.3 }}
-                      className="flex items-center gap-3 flex-wrap"
+                      className="flex items-center justify-center gap-3 flex-wrap text-center"
                     >
                       <span className="inline-flex items-center gap-1 bg-green-100 text-green-800 text-sm font-medium px-3 py-1 rounded-full shadow-sm">
                         ✅ Ya probada
