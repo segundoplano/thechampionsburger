@@ -198,8 +198,11 @@ export default function Navbar() {
 
 
               <SignedOut>
+              <div className="flex flex-col gap-2">
                 <button
                   onClick={() => {
+                    localStorage.setItem("redirectAfterLogin", window.location.pathname);
+                    setModalType("signin");
                     setShowModal(true);
                     setMenuOpen(false);
                   }}
@@ -207,7 +210,20 @@ export default function Navbar() {
                 >
                   Iniciar sesión
                 </button>
-              </SignedOut>
+                <button
+                  onClick={() => {
+                    localStorage.setItem("redirectAfterLogin", window.location.pathname);
+                    setModalType("signup");
+                    setShowModal(true);
+                    setMenuOpen(false);
+                  }}
+                  className="border border-purple-600 text-purple-600 px-4 py-2 rounded hover:bg-purple-100 transition text-sm"
+                >
+                  Registrarse
+                </button>
+              </div>
+            </SignedOut>
+
 
               <SignedIn>
                 <div className="pt-4">

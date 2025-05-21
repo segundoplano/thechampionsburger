@@ -31,6 +31,7 @@ export default function Banner() {
         >
           Las mejores hamburguesas gourmet reunidas en un evento único.
         </motion.p>
+        
       </div>
     </section>
   );

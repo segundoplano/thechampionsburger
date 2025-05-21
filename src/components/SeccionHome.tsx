@@ -17,8 +17,11 @@ export default function SeccionHome() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-8">
           <img src="/galeria/comida1.jpg" alt="Comida 1" className="w-full md:w-1/2 object-cover rounded-lg shadow-lg h-auto" />
           <div className="text-white text-center md:text-left space-y-4">
-            <h2 className="text-4xl font-bold" style={{ color: "#ffedd5" }}>Sabores de otro nivel</h2>
-            <p className="text-lg">Hamburguesas, postres y bebidas que compiten por tu paladar. ¿Cuál será tu favorita?</p>
+            <h2 className="text-4xl font-bold" style={{ color: "#ffedd5" }}>¿Qué es Champions Burger?</h2>
+            <p className="text-lg">Esta app está diseñada para los fans del campeonato <strong>The Champions Burger</strong>. 
+      Aquí podrás explorar todas las hamburguesas participantes, marcarlas como <strong>probadas</strong> o <strong>favoritas</strong>, 
+      valorarlas del 1 al 5 con estrellas y llevar un registro personal de tu experiencia. 
+      ¡Haz que cada mordisco cuente!</p>
           </div>
         </div>
       </motion.div>
