@@ -174,7 +174,7 @@ export default function BurgerCarousel() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => (window.location.href = "/burgers")}
+            onClick={() => (window.location.href = "/burger")}
             className="mt-6 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium text-base"
           >
             Ver más

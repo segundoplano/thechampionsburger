@@ -41,6 +41,12 @@ const BurgerCard: FC<Props> = ({
           className="w-full h-64 object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition duration-300"></div>
+        <a
+          href={`/burgers/${id}`}
+          className="whitespace-nowrap absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 bg-black text-white text-sm py-2 px-6 rounded-full transition-all duration-300"
+        >
+          Ver detalles
+        </a>
       </div>
 
       <div className="p-4 flex flex-col flex-1 justify-between min-h-[220px] relative">

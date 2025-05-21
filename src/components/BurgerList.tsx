@@ -133,7 +133,7 @@ export default function BurgersList() {
       </div>
 
       {/* Buscador y filtros */}
-      <div className="mt-6 mb-6 max-w-[400px] mx-auto">
+      <div className="mt-6 mb-6 w-full px-4">
         <input
           type="text"
           placeholder="Buscar por nombre de burger..."
@@ -169,15 +169,19 @@ export default function BurgersList() {
         )}
 
         {/* NUEVO: filtros de alérgenos */}
-        <div className="flex justify-center gap-5 mt-4">
+        
+        <div className="relative w-full mt-8">
+        <div className="flex justify-center flex-wrap gap-4">
           {alergenos.map((alerg) => {
             const isSelected = selectedAlergenos.includes(alerg.nombre);
             return (
               <label
                 key={alerg.nombre}
-                className={`flex items-center gap-1 cursor-pointer rounded-full pl-4 pr-7 text-xs shadow-sm select-none
-          ${isSelected ? "bg-purple-600 text-white" : "bg-yellow-100 text-purple-700"}
-        `}
+                className={`flex items-center gap-2 cursor-pointer rounded-full px-5 py-2 text-xs shadow-sm select-none
+                transition-transform duration-200 hover:scale-105
+                ${isSelected ? "bg-purple-600 text-white" : "bg-yellow-100 text-purple-700"}
+              `}
+
               >
                 <input
                   type="checkbox"
@@ -195,8 +199,7 @@ export default function BurgersList() {
                   <img
                     src={alerg.icono_url}
                     alt={alerg.nombre}
-                    className={`w-4 h-4 object-contain ${isSelected ? "filter brightness-200" : ""
-                      }`}
+                    className={`w-4 h-4 object-contain ${isSelected ? "filter brightness-200" : ""}`}
                   />
                 )}
                 <span>{alerg.nombre}</span>
@@ -204,6 +207,19 @@ export default function BurgersList() {
             );
           })}
         </div>
+
+        {/* Icono de ayuda posicionado globalmente respecto al ancho completo */}
+        <div className="absolute -top-6 right-6 group">
+          <div className="w-5 h-5 bg-purple-600 text-white text-xs rounded-full flex items-center justify-center cursor-help">
+            ?
+          </div>
+          <div className="absolute right-1/2 translate-x-1/2 bottom-6
+ bg-black text-white text-[10px] px-3 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 whitespace-nowrap">
+            Desmarca los alérgenos que no quieres ver
+          </div>
+        </div>
+      </div>
+
       </div>
 
       {/* Burgers o mensajes */}
