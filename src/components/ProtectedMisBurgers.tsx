@@ -41,6 +41,8 @@ export default function ProtectedMisBurgers() {
           );
 
         setAlergenos(allAlergenos);
+        setSelectedAlergenos(allAlergenos.map((a) => a.nombre)); // ✅ marcar todos por defecto
+
       }
 
       setLoading(false);
@@ -146,8 +148,10 @@ export default function ProtectedMisBurgers() {
       <SignInModal />
 
       <SignedIn>
-        <div className="p-4">
-          <h1 className="text-2xl font-bold mb-4">🍔 Mis hamburguesas degustadas</h1>
+        <div className="max-w-[1200px] mx-auto px-4 pt-24">
+          <div className="text-center mt-8">
+            <h1 className="text-3xl font-bold mb-2">🍔 Mis hamburguesas degustadas</h1>
+          </div>
           <p className="text-center text-lg text-gray-700 max-w-2xl mx-auto mt-6 leading-relaxed">
             Estas son las burgers que ya has disfrutado.<br />
             ¿Quieres cambiar alguna nota o seguir sumando nuevas experiencias?<br />
@@ -174,15 +178,16 @@ export default function ProtectedMisBurgers() {
 
 
           {/* 🔍 Buscador */}
-          <div className="relative max-w-md mx-auto mb-6">
-            <input
-              type="text"
-              placeholder="🔍 Buscar por nombre..."
-              className="border border-gray-300 mt-8 rounded-full px-4 py-2 w-full shadow-sm focus:ring-2 focus:ring-purple-500 focus:outline-none"
-              value={searchText}
-              onChange={(e) => setSearchText(e.target.value)}
-            />
-          </div>
+          <div className="mt-6 mb-6 w-full px-4">
+          <input
+            type="text"
+            placeholder="Buscar por nombre de burger..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+        </div>
+
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-4 mb-6 text-sm text-gray-800">
             {/* Ordenar por */}
@@ -223,43 +228,82 @@ export default function ProtectedMisBurgers() {
 
 
           {/* 🧩 Filtros por alérgenos */}
-          <div className="mb-6 flex flex-wrap gap-3">
-            {alergenos.map((alerg) => {
-              const isSelected = selectedAlergenos.includes(alerg.nombre);
-              return (
-                <button
-                  key={alerg.nombre}
-                  onClick={() =>
-                    setSelectedAlergenos((prev) =>
-                      isSelected ? prev.filter((a) => a !== alerg.nombre) : [...prev, alerg.nombre]
-                    )
-                  }
-                  className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs shadow-sm transition-transform duration-200 hover:scale-105 hover:brightness-110 ${
-                    isSelected
-                      ? "bg-purple-600 text-white"
-                      : "bg-yellow-100 text-gray-800"
-                  }`}
-                >
-                  {alerg.icono_url && (
-                    <img
-                      src={alerg.icono_url}
-                      alt={alerg.nombre}
-                      className="w-3.5 h-3.5 object-contain"
-                    />
-                  )}
-                  {alerg.nombre}
-                </button>
-              );
-            })}
-          </div>
+          {alergenos.length > 0 && (
+  <div className="relative w-full mt-8">
+    <div className="flex justify-center flex-wrap gap-4">
+      {alergenos.map((alerg) => {
+        const isSelected = selectedAlergenos.includes(alerg.nombre);
+        return (
+          <label
+            key={alerg.nombre}
+            className={`flex items-center gap-2 cursor-pointer rounded-full px-5 py-2 text-xs shadow-sm select-none
+              transition-transform duration-200 hover:scale-105
+              ${isSelected ? "bg-purple-600 text-white" : "bg-yellow-100 text-purple-700"}
+            `}
+          >
+            <input
+              type="checkbox"
+              className="hidden"
+              checked={isSelected}
+              onChange={() => {
+                setSelectedAlergenos((prev) =>
+                  isSelected
+                    ? prev.filter((a) => a !== alerg.nombre)
+                    : [...prev, alerg.nombre]
+                );
+              }}
+            />
+            {alerg.icono_url && (
+              <img
+                src={alerg.icono_url}
+                alt={alerg.nombre}
+                className={`w-4 h-4 object-contain ${isSelected ? "filter brightness-200" : ""}`}
+              />
+            )}
+            <span>{alerg.nombre}</span>
+          </label>
+        );
+      })}
+    </div>
+
+    <div className="h-6" /> {/* Espacio entre alérgenos y cards */}
+
+
+    {/* Icono de ayuda solo si hay alérgenos */}
+    <div className="absolute -top-6 right-6 group">
+      <div className="w-5 h-5 bg-purple-600 text-white text-xs rounded-full flex items-center justify-center cursor-help">
+        ?
+      </div>
+      <div className="absolute right-1/2 translate-x-1/2 bottom-6
+      bg-black text-white text-[10px] px-3 py-1 rounded shadow-md opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none z-10 whitespace-nowrap">
+        Desmarca los alérgenos que no quieres ver
+      </div>
+    </div>
+  </div>
+)}
+
+
 
 
           {/* 🍔 Tarjetas de hamburguesas */}
           {loading ? (
-            <p>Cargando tus burgers...</p>
+            <p className="text-center text-gray-500 mt-10">Cargando tus burgers...</p>
           ) : filteredBurgers.length === 0 ? (
-            <p>No hay burgers que coincidan con tu búsqueda 😢</p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key="no-results"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center text-gray-500 mt-10"
+              >
+                {misBurgers.length === 0
+                  ? "Aún no has probado ninguna burger. Ve a la carta y marca tus favoritas para llevar el control 🍔"
+                  : "No hay burgers que coincidan con tu búsqueda 😢"}
+              </motion.p>
+            </AnimatePresence>
           ) : (
+
             <ul className="flex flex-col space-y-8">
             <AnimatePresence mode="popLayout">
             {filteredBurgers.map((item) => (
@@ -306,7 +350,13 @@ export default function ProtectedMisBurgers() {
 
                 {/* 📝 Nombre y descripción */}
                 <div className="flex-1 text-center md:text-left">
-                  <h2 className="text-xl font-bold text-purple-800">{item.hamburguesas.nombre}</h2>
+                  <a
+                    href={`/burgers/${item.hamburguesas.id}`}
+                    className="text-xl font-bold text-purple-800 hover: hover:text-purple-600 transition"
+                  >
+                    {item.hamburguesas.nombre}
+                  </a>
+
                   <p className="text-gray-700 mt-1 line-clamp-3">
                     {item.hamburguesas.descripcion || "No hay descripción disponible..."}
                   </p>
@@ -391,6 +441,8 @@ export default function ProtectedMisBurgers() {
         )}
 
       </SignedIn>
+      <div className="mt-12" /> {/* Espacio antes del footer */}
+
     </>
   );
 }
