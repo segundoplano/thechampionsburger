@@ -21,6 +21,8 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
   const [puntuacion, setPuntuacion] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const [mostrarEstrellas, setMostrarEstrellas] = useState(false);
+  const redirectUrl = window.location.pathname;
+
 
 
   useEffect(() => {
@@ -110,7 +112,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
     <main className="max-w-5xl mx-auto px-1 py-8 space-y-6">
       {/* Logo restaurante */}
       {burger.logo_url && (
-        <div className="flex justify-center bg-black rounded-lg p-4 shadow-md mt-6 mb-6">
+        <div className="flex justify-center bg-black rounded-lg p-4 shadow-md mt-16 mb-6">
           <img
             src={burger.logo_url}
             alt={`Logo de ${burger.restaurante}`}
@@ -118,7 +120,7 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
           />
         </div>
       )}
-      <div className="items-center justify-center h-20">
+      <div className="items-center justify-center h-14">
         <h1 className="text-4xl font-bold text-center">{burger.nombre}</h1>
       </div>
       {/* Contenido en 2 columnas */}
@@ -179,11 +181,12 @@ export default function BurgerDetailWrapper({ burgerId }: Props) {
                   </p>
 
                   <button
-                    onClick={open}
-                    className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transform transition-transform duration-200 hover:scale-105 shadow-lg shadow-yellow-100/40"
-                  >
-                    Iniciar sesión ahora
-                  </button>
+                  onClick={() => open({ redirectUrl: window.location.pathname })}
+                  className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transform transition-transform duration-200 hover:scale-105 shadow-lg shadow-yellow-100/40"
+                >
+                  Iniciar sesión ahora
+                </button>
+
 
                 </div>
                 <p className="text-xs text-gray-400 mt-1">

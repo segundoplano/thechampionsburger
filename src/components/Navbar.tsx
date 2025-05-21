@@ -83,29 +83,32 @@ export default function Navbar() {
       <SignedOut>
         {showModal && (
           <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-4 rounded-lg shadow-lg relative">
-              <button
-                onClick={() => setShowModal(false)}
-                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700"
-              >
-                ❌
-              </button>
-              <SignIn
-                redirectUrl={pathname}
-                appearance={{
-                  elements: {
-                    card: "shadow-xl rounded-xl",
-                    headerTitle: "text-2xl font-bold text-center",
-                    socialButtonsBlockButton: "bg-black hover:bg-gray-800 text-white",
-                    formFieldLabel: "text-gray-700",
-                    formButtonPrimary: "bg-purple-600 hover:bg-purple-700 text-white",
-                  },
-                }}
-              />
-            </div>
+            {/* ❌ personalizada fuera del card */}
+            <button
+              onClick={() => setShowModal(false)}
+              className="absolute top-6 right-6 z-50 text-gray-400 hover:text-gray-600 text-3xl leading-none"
+            >
+              ×
+            </button>
+
+            <SignIn
+              redirectUrl={pathname}
+              appearance={{
+                elements: {
+                  closeButton: "hidden", // ocultamos la X por defecto de Clerk
+                  card: "rounded-xl shadow-2xl border border-gray-200",
+                  headerTitle: "text-xl font-bold",
+                  socialButtonsBlockButton: "bg-white border hover:bg-gray-100 text-black",
+                  formFieldInput: "rounded-md border-gray-300 focus:ring-purple-500",
+                  footerActionLink: "text-purple-600 hover:underline",
+                  formButtonPrimary: "bg-purple-600 hover:bg-purple-700 text-white",
+                },
+              }}
+            />
           </div>
         )}
       </SignedOut>
+
 
       {/* Navegación móvil */}
       <AnimatePresence>
