@@ -12,11 +12,11 @@ Aplicación web desarrollada para mostrar las hamburguesas participantes en el c
 ## 🔥 Demo en vivo
 [cb.lygarmo.com](http://cb.lygarmo.com/)
 
-Home[image](https://github.com/user-attachments/assets/7ceb0432-8567-4d08-81a4-7ba561b5c82e)
+![Home][image](https://github.com/user-attachments/assets/7ceb0432-8567-4d08-81a4-7ba561b5c82e)
 
-Burgers[image](https://github.com/user-attachments/assets/c171eac7-1bce-4dc0-bc0d-054c92e89af3)
+![Burgers][image](https://github.com/user-attachments/assets/c171eac7-1bce-4dc0-bc0d-054c92e89af3)
 
-Mis burgers[image](https://github.com/user-attachments/assets/5e7264f8-cdef-4f2c-addb-9f41a11ce45b)
+![Mis burgers][image](https://github.com/user-attachments/assets/5e7264f8-cdef-4f2c-addb-9f41a11ce45b)
 
 
 ---
